@@ -43,8 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41ee874001ddc245b3358e29bd6d16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainCube: {fileID: 790372107525465534, guid: a8a892eaa251b664bb9a71619c9c0eca,
+  terrain_cube: {fileID: 790372107525465534, guid: a8a892eaa251b664bb9a71619c9c0eca,
     type: 3}
-  bottomColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0}
-  midColor: {r: 0.38679248, g: 0.27027452, b: 0.10399608, a: 1}
-  surfaceColor: {r: 0.21537916, g: 0.8301887, b: 0.5591993, a: 1}
+  tree_patch: {fileID: 3952528370472541890, guid: 39982bf57ab82d748aafed4467a8e38e,
+    type: 3}
+  river: {fileID: 1883750238358715509, guid: fdfe3c4343e6ec746bacabdc4b071881, type: 3}
+  bottom_color: {r: 0, g: 0, b: 0, a: 1}
+  mid_color: {r: 0.5566038, g: 0.37692684, b: 0.13389996, a: 1}
+  surface_color: {r: 0.11035956, g: 0.754717, b: 0.54426134, a: 1}
+  tree_coverage_percentage: 0.5
