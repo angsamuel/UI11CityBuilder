@@ -34,10 +34,8 @@ public class VRObjectRotation : MonoBehaviour
             Vector3 delta = cachedPosition - controlObject.transform.localPosition;
             objectToRotate.transform.Rotate(Vector3.up, delta.x * ySensativity, Space.World);
             objectToRotate.transform.Rotate(Vector3.right, -delta.y * xSensativity, Space.World);
-            cachedPosition = controlObject.transform.localPosition;
-        }else{
-            cachedPosition = controlObject.transform.localPosition;
         }
+        cachedPosition = controlObject.transform.localPosition;
     }
 
 
