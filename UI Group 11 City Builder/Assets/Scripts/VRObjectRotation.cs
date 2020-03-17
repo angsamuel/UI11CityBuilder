@@ -30,6 +30,11 @@ public class VRObjectRotation : MonoBehaviour
         }else{
             rotating = false;
         }
+        if(Input.GetAxisRaw("Fire2") != 0){
+            objectToRotate.transform.localEulerAngles = new Vector3(0,0,0);
+            cachedPosition = new Vector3(0,0,0);
+        }
+
         if(rotating){
             Vector3 delta = cachedPosition - controlObject.transform.localPosition;
             objectToRotate.transform.Rotate(Vector3.up, delta.x * ySensativity, Space.World);
