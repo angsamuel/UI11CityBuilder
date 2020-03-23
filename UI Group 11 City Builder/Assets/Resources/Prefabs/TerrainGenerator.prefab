@@ -48,7 +48,17 @@ MonoBehaviour:
   tree_patch: {fileID: 3952528370472541890, guid: 39982bf57ab82d748aafed4467a8e38e,
     type: 3}
   river: {fileID: 1883750238358715509, guid: fdfe3c4343e6ec746bacabdc4b071881, type: 3}
+  ore_deposit: {fileID: 2938556125896364903, guid: fe1baaea55d4f1e4e8d8a46925ea13d1,
+    type: 3}
+  city_center: {fileID: 6249571560682622241, guid: a5dfb92e7d0e5564e9f1160bad34346a,
+    type: 3}
   bottom_color: {r: 0, g: 0, b: 0, a: 1}
   mid_color: {r: 0.5566038, g: 0.37692684, b: 0.13389996, a: 1}
   surface_color: {r: 0.11035956, g: 0.754717, b: 0.54426134, a: 1}
-  tree_coverage_percentage: 0.5
+  tree_coverage_percentage: 0.25
+  ore_coverage_percentage: 0.05
+  pop: 0
+  food: 0
+  wood: 0
+  ore: 0
+  money: 0

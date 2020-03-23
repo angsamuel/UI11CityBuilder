@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainGenerator : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [Header("Generation Prefabs")]
     public GameObject terrain_cube; //prefab to be spawned in
@@ -10,6 +10,8 @@ public class TerrainGenerator : MonoBehaviour
     [Header("Building Prefabs")]
     public GameObject tree_patch;
     public GameObject river;
+    public GameObject ore_deposit;
+    public GameObject city_center;
 
     [Header("Preferences")]
     public Color bottom_color;
@@ -18,15 +20,28 @@ public class TerrainGenerator : MonoBehaviour
 
     [Range(0,1)]
     public float tree_coverage_percentage;
+    [Range(0,1)]
+    public float ore_coverage_percentage;
 
     //Trackers
-    int map_size = 0;
+    public int map_size = 0;
     TerrainCube[,] surface_cubes; //2D array containing cubes on top of terrain
     Building[,] surface_buildings;
+
+    //resources
+    [Header("Resources")]
+    public int pop;
+    public int food;
+    public int wood;
+    public int ore;
+    public int money;
+    
+
     // Start is called before the first frame update
     void Awake()
     {
         GenerateTerrain(9);
+        PlaceCityCenter();
         PlaceNature();
         
     }
@@ -81,6 +96,11 @@ public class TerrainGenerator : MonoBehaviour
         direction_list.Add(new Vector2(1,0));
         direction_list.Add(new Vector2(-1,0));
         return direction_list;
+    }
+
+    //place city center
+    public void PlaceCityCenter(){
+        PlaceBuilding(city_center,map_size/2,map_size/2);
     }
 
     //this method places initial buildings such as trees, and rivers
@@ -153,11 +173,22 @@ public class TerrainGenerator : MonoBehaviour
             coordinates.RemoveAt(selected_index);
             PlaceBuilding(tree_patch,x,z);
         }
+        
+        //place ore deposits
+        int ores_to_place = (int)(ore_coverage_percentage * coordinates.Count);
+        for(int i = 0; i<ores_to_place; i++){
+            int selected_index = Random.Range(0,coordinates.Count);
+            Vector2 coordinate = coordinates[selected_index];
+            int x = (int)coordinate.x;
+            int z = (int)coordinate.y;
+            coordinates.RemoveAt(selected_index);
+            PlaceBuilding(ore_deposit,x,z);
+        }
 
     }
 
     public bool CanPlaceBuilding(int x, int z){
-        return surface_buildings[x,z] == null;
+        return x >= 0 && x < map_size && z >= 0 && z < map_size && surface_buildings[x,z] == null;
     }
     //USE THIS METHOD TO PLACE A BUILDING
     public bool PlaceBuilding(GameObject building_prefab,int x, int z){
@@ -166,10 +197,14 @@ public class TerrainGenerator : MonoBehaviour
         }
         else{
             GameObject newBuilding = Instantiate(building_prefab,surface_cubes[x,z].transform);
-            surface_buildings[x,z] = newBuilding.GetComponent<Building>();
             newBuilding.GetComponent<Building>().SetMaster(x,z,this);
-            newBuilding.GetComponent<Building>().ActivateBuilding();
-
+            if(newBuilding.GetComponent<Building>().BuildingConstraintsSatisfied(x,z) && newBuilding.GetComponent<Building>().CanPayForBuilding()){
+                surface_buildings[x,z] = newBuilding.GetComponent<Building>();
+                newBuilding.GetComponent<Building>().ActivateBuilding();
+            }else{
+                Destroy(newBuilding);
+                return false;
+            }
         }
         return true;
     }
