@@ -36,13 +36,13 @@ public class ConnectBuilding : Building
                 nsew_buildings[1].GetComponent<ConnectBuilding>().ConnectToNeighbors(false);
             }
         }
-        if(surface_blocks[2] == null || nsew_buildings[2] != null && nsew_buildings[2].building_name == building_name){
+        if(surface_blocks[2] == null || nsew_buildings[2] != null){
             east_object.SetActive(true);
             if(from_master && nsew_buildings[2] != null && nsew_buildings[2].building_name == building_name){
                 nsew_buildings[2].GetComponent<ConnectBuilding>().ConnectToNeighbors(false);
             }
         }
-        if(surface_blocks[3] == null || nsew_buildings[3] != null && nsew_buildings[3].building_name == building_name){
+        if(surface_blocks[3] == null || nsew_buildings[3] != null){
             west_object.SetActive(true);
             if(from_master && nsew_buildings[3] != null && nsew_buildings[3].building_name == building_name){
                 nsew_buildings[3].GetComponent<ConnectBuilding>().ConnectToNeighbors(false);

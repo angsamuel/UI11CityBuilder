@@ -83,6 +83,8 @@ public class GameManager : MonoBehaviour
 
                     if(y == size -1){
                         surface_cubes[x,z] = newterrain_cube.GetComponent<TerrainCube>(); //save cubes on the surface for reference later
+                        surface_cubes[x,z].x = x;
+                        surface_cubes[x,z].z = z;
                     }
                 }
             }
@@ -161,8 +163,6 @@ public class GameManager : MonoBehaviour
             
         }
 
-
-
         //place trees
         int trees_to_place = (int)(tree_coverage_percentage * coordinates.Count);
         for(int i = 0; i<trees_to_place; i++){
@@ -200,13 +200,27 @@ public class GameManager : MonoBehaviour
             newBuilding.GetComponent<Building>().SetMaster(x,z,this);
             if(newBuilding.GetComponent<Building>().BuildingConstraintsSatisfied(x,z) && newBuilding.GetComponent<Building>().CanPayForBuilding()){
                 surface_buildings[x,z] = newBuilding.GetComponent<Building>();
+                GetSurfaceCube(x,z).building = newBuilding.gameObject;
+                newBuilding.transform.localPosition = new Vector3(0,0,0);
                 newBuilding.GetComponent<Building>().ActivateBuilding();
+                ConnectRoads(x,z);
             }else{
                 Destroy(newBuilding);
                 return false;
             }
         }
         return true;
+    }
+
+    void ConnectRoads(int x, int z){
+        List<Building> potentialRoads = GetSurroundingBuildings(x,z);
+        foreach(Building b in potentialRoads){
+            if(b != null){
+                if(b.name == "Road"){
+                    b.GetComponent<ConnectBuilding>().ConnectToNeighbors(true);
+                }
+            }
+        }
     }
 
     public Building GetBuilding(int x, int z){
@@ -224,6 +238,20 @@ public class GameManager : MonoBehaviour
         return_list.Add(GetBuilding(x,z-1));
         return_list.Add(GetBuilding(x+1,z));
         return_list.Add(GetBuilding(x-1,z));
+        return return_list;
+    }
+
+    public List<Building> GetSurroundingBuildings(int x, int z){
+        List<Building> return_list = new List<Building>();
+        for(int cx = -1; cx < 2; cx++){
+            for(int cz = -1; cz<2; cz++){
+                if(cz != 0 || cz != 0){
+                    return_list.Add(GetBuilding(cx+x,cz+z));
+                }
+            }
+        }
+
+        
         return return_list;
     }
     public List<TerrainCube> GetNSEWSurfaceBlocks(int x, int z){
