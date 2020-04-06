@@ -254,6 +254,19 @@ public class GameManager : MonoBehaviour
         
         return return_list;
     }
+
+    public List<Building> GetBuildingsInRadius(int x, int z, int radius){
+        List<Building> return_list = new List<Building>();
+        for(int cx = -radius; cx < radius+1; cx++){
+            for(int cz = -radius; cz < radius+1; cz++){
+                if(cx != 0 || cz != 0){
+                    return_list.Add(GetBuilding(cx+x,cz+z));
+                }
+                
+            }
+        }
+        return return_list;
+    }
     public List<TerrainCube> GetNSEWSurfaceBlocks(int x, int z){
         List<TerrainCube> return_list = new List<TerrainCube>();
         return_list.Add(GetSurfaceCube(x,z+1));
