@@ -78,8 +78,15 @@ public class ControllerGrabObject : MonoBehaviour
     {
         if(grabAction.GetLastStateDown(handType))
         {
-            if(collidingObject)
+            if(collidingObject && collidingObject.tag != "BldgPlace")
             {
+                GrabObject();
+            }
+            else if(collidingObject && collidingObject.tag == "BldgPlace")
+            {
+                Building bldg = collidingObject.GetComponent<Building>();
+                GameObject newBldg = Instantiate(bldg.GetComponent<GameObject>(), this.transform);
+                collidingObject = newBldg;
                 GrabObject();
             }
         }
