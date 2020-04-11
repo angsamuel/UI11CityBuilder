@@ -9,6 +9,7 @@ public class ResourceCount : MonoBehaviour
     public Text foodCountText;
     public Text moneyCountText; 
     public Text populationCountText;
+    public Text helthBarSliderObject;
     GameManager gameManager;
     void Start()
     {
@@ -22,6 +23,8 @@ public class ResourceCount : MonoBehaviour
         foodCountText.text = gameManager.food.ToString();
         moneyCountText.text = gameManager.money.ToString();
        populationCountText.text = gameManager.pop.ToString();
+        helthBarSliderObject.text = gameManager.tree_coverage_percentage.ToString();
     }
+    
 
 }
