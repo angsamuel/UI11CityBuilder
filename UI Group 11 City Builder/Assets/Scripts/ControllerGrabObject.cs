@@ -12,6 +12,8 @@ public class ControllerGrabObject : MonoBehaviour
     
     private GameObject collidingObject;
     private GameObject objectInHand;
+
+    private bool bldgGrabbed = false;
     
     private void SetCollidingObject(Collider col)
     {
@@ -63,6 +65,15 @@ public class ControllerGrabObject : MonoBehaviour
     {
         if(GetComponent<FixedJoint>())
         {
+            if(bldgGrabbed)
+            {
+                GetComponent<FixedJoint>().connectedBody = null;
+                Destroy(GetComponent<FixedJoint>());
+                objectInHand.SendMessage("tryToPlaceThis");
+                Destroy(objectInHand);
+                bldgGrabbed = false;
+            }
+
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
 
@@ -80,13 +91,16 @@ public class ControllerGrabObject : MonoBehaviour
         {
             if(collidingObject && collidingObject.tag != "BldgPlace")
             {
+                Debug.Log("Grabbed non-bldg");
                 GrabObject();
             }
-            else if(collidingObject && collidingObject.tag == "BldgPlace")
+            else if(collidingObject && collidingObject.tag == "BldgPlace" && !bldgGrabbed)
             {
-                Building bldg = collidingObject.GetComponent<Building>();
-                GameObject newBldg = Instantiate(bldg.GetComponent<GameObject>(), this.transform);
+                Debug.Log("Grabbed bldg");
+                //Building bldg = collidingObject.GetComponent<Building>();
+                GameObject newBldg = Instantiate(collidingObject, this.transform.position, collidingObject.transform.rotation, this.transform);
                 collidingObject = newBldg;
+                bldgGrabbed = true;
                 GrabObject();
             }
         }

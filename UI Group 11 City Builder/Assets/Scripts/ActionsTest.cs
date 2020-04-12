@@ -14,12 +14,12 @@ public class ActionsTest : MonoBehaviour
     {
         if(GetTeleportDown())
         {
-            Debug.Log("Teleport " + handType);
+            //Debug.Log("Teleport " + handType);
         }
 
         if(GetGrab())
         {
-            Debug.Log("Grab " + handType);
+            //Debug.Log("Grab " + handType);
         }
     }
 
