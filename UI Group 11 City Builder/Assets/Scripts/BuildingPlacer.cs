@@ -57,6 +57,7 @@ public class BuildingPlacer : MonoBehaviour
         {
             Debug.Log("X: " + closest.x);
             Debug.Log("Z: " + closest.z);
+            //Debug.Log("GameManager: " + game_manager == null);
             TerrainCube newCube = game_manager.GetSurfaceCube(closest.x, closest.z);
             
             if(newCube != null)
