@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5765135414611343327}
   - component: {fileID: 5765135414611343326}
   m_Layer: 0
-  m_Name: TerrainGenerator
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   bottom_color: {r: 0, g: 0, b: 0, a: 1}
   mid_color: {r: 0.5566038, g: 0.37692684, b: 0.13389996, a: 1}
   surface_color: {r: 0.11035956, g: 0.754717, b: 0.54426134, a: 1}
-  tree_coverage_percentage: 0.2
+  tree_coverage_percentage: 0.15
   ore_coverage_percentage: 0.1
   map_size: 0
   pop: 0
