@@ -18,7 +18,6 @@ public class BuildingPlacer : MonoBehaviour
 
         this.GetComponent<MeshFilter>().mesh = buildingObj.GetComponent<MeshFilter>().sharedMesh;
         this.GetComponent<MeshRenderer>().material = buildingObj.GetComponent<MeshRenderer>().sharedMaterial;
-
         bldgModel = buildingObj.transform.GetChild(0).gameObject;
         Instantiate(bldgModel, this.transform);
 
