@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mine : Building
 {
-    public virtual void ActivateBuilding(){
+    public override void ActivateBuilding(){
         List<Building> buildingsCloseBy = game_manager.GetBuildingsInRadius(x_coord,z_coord,1);
         foreach(Building b in buildingsCloseBy){
             if(b != null){
@@ -13,9 +13,18 @@ public class Mine : Building
                 }
             }
         }
+
+        List<Building> possibleTrees = game_manager.GetBuildingsInRadius(x_coord,z_coord,1);
+        foreach(Building b in possibleTrees){
+            if(b != null){
+                if(b.GetComponent<TreePatch>() != null){
+                    Destroy(b.gameObject);
+                }
+            }
+        }
     }
 
-    public virtual bool BuildingConstraintsSatisfied(int x, int z){
+    public override bool BuildingConstraintsSatisfied(int x, int z){
         bool hasRoad = false;
         bool farFromMine = true;
         List<Building> buildingsCloseBy = game_manager.GetBuildingsInRadius(x,z,1);
@@ -35,14 +44,7 @@ public class Mine : Building
             }
         }
 
-        List<Building> possibleTrees = game_manager.GetBuildingsInRadius(x,z,2);
-        foreach(Building b in possibleTrees){
-            if(b != null){
-                if(b.GetComponent<TreePatch>() != null){
-                    Destroy(b.gameObject);
-                }
-            }
-        }
+        
         return hasRoad && farFromMine;
     }
 }

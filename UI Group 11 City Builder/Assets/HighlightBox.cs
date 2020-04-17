@@ -8,8 +8,10 @@ public class HighlightBox : MonoBehaviour
     public Color greenColor;
     public Color redColor;
     public Color whiteColor;
+    GameManager gm;
 
     void Start(){
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         Clear();
     }
 
@@ -19,7 +21,8 @@ public class HighlightBox : MonoBehaviour
     public void Highlight(TerrainCube tc, Building b){
         transform.position = tc.transform.position;
         model.transform.localScale = new Vector3(1,500,1);
-        if(b.BuildingConstraintsSatisfied(tc.x,tc.z)){
+        transform.eulerAngles = tc.transform.eulerAngles;
+        if(b.BuildingConstraintsSatisfied(tc.x,tc.z) && gm.CanPlaceBuilding(tc.x,tc.z) && b.CanPayForBuilding()){
             model.GetComponent<Renderer>().material.color = greenColor;
         }else{
             model.GetComponent<Renderer>().material.color = redColor;
@@ -29,6 +32,7 @@ public class HighlightBox : MonoBehaviour
     public void Highlight(TerrainCube tc){
         transform.position = tc.transform.position;
         model.transform.localScale = new Vector3(1,500,1);
+        transform.eulerAngles = tc.transform.eulerAngles;
         model.GetComponent<Renderer>().material.color = whiteColor;
     }
 }

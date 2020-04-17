@@ -24,8 +24,8 @@ public class VRObjectRotation : MonoBehaviour
     }
 
 
-    void FixedUpdate(){
-        if(Input.GetAxisRaw(axisToActivateRotation) != 0){
+    void Update(){
+        if(OVRInput.Get(OVRInput.Button.One)){
             rotating = true;
         }else{
             rotating = false;
@@ -37,8 +37,10 @@ public class VRObjectRotation : MonoBehaviour
 
         if(rotating){
             Vector3 delta = cachedPosition - controlObject.transform.localPosition;
-            objectToRotate.transform.Rotate(Vector3.up, delta.x * ySensativity, Space.World);
-            objectToRotate.transform.Rotate(Vector3.right, -delta.y * xSensativity, Space.World);
+            //if(delta.x < 1f && delta.y < 1f){
+                objectToRotate.transform.Rotate(Vector3.up, delta.x * ySensativity, Space.World);
+                objectToRotate.transform.Rotate(Vector3.right, -delta.y * xSensativity, Space.World);
+            //}
         }
         cachedPosition = controlObject.transform.localPosition;
     }

@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
                         surface_cubes[x,z] = newterrain_cube.GetComponent<TerrainCube>(); //save cubes on the surface for reference later
                         surface_cubes[x,z].x = x;
                         surface_cubes[x,z].z = z;
+                        surface_cubes[x,z].surfaceCube = true;
                     }
                 }
             }
@@ -188,7 +189,7 @@ public class GameManager : MonoBehaviour
     }
 
     public bool CanPlaceBuilding(int x, int z){
-        return x >= 0 && x < map_size && z >= 0 && z < map_size && surface_buildings[x,z] == null;
+        return x >= 0 && x < map_size && z >= 0 && z < map_size && surface_cubes[x,z].building == null;
     }
     //USE THIS METHOD TO PLACE A BUILDING
     public bool PlaceBuilding(GameObject building_prefab,int x, int z){
@@ -198,8 +199,10 @@ public class GameManager : MonoBehaviour
         else{
             GameObject newBuilding = Instantiate(building_prefab,surface_cubes[x,z].transform);
             newBuilding.GetComponent<Building>().SetMaster(x,z,this);
+            
             if(newBuilding.GetComponent<Building>().BuildingConstraintsSatisfied(x,z) && newBuilding.GetComponent<Building>().CanPayForBuilding()){
                 surface_buildings[x,z] = newBuilding.GetComponent<Building>();
+                newBuilding.GetComponent<Building>().PayForBuilding();
                 GetSurfaceCube(x,z).building = newBuilding.gameObject;
                 newBuilding.transform.localPosition = new Vector3(0,0,0);
                 newBuilding.GetComponent<Building>().ActivateBuilding();
@@ -245,7 +248,7 @@ public class GameManager : MonoBehaviour
         List<Building> return_list = new List<Building>();
         for(int cx = -1; cx < 2; cx++){
             for(int cz = -1; cz<2; cz++){
-                if(cz != 0 || cz != 0){
+                if(cx != 0 || cz != 0){
                     return_list.Add(GetBuilding(cx+x,cz+z));
                 }
             }

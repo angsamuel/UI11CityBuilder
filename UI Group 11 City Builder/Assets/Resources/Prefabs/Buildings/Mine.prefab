@@ -298,7 +298,7 @@ MonoBehaviour:
   building_name: 
   pop_cost: 0
   food_cost: 0
-  wood_cost: 0
+  wood_cost: 3
   ore_cost: 0
   money_cost: 0
 --- !u!1 &6952380063298385602

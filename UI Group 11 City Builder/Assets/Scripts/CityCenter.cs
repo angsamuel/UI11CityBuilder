@@ -18,7 +18,8 @@ public class CityCenter : Building
 
     public override void ActivateBuilding(){
         game_manager.wood += 10;
-        game_manager.ore += 5;
+        game_manager.ore += 10;
+        game_manager.food += 10;
     }
 
 

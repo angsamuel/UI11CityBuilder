@@ -22,6 +22,11 @@ public class Building : MonoBehaviour
         
     }
 
+    public void Awake()
+    {
+        game_manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
     // Update is called once per frame
     void Update()
     {
