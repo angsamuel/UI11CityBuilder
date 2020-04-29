@@ -2210,10 +2210,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   building_name: Farm
+  description: Provides (+1) food for each adjacent farm, and river. Must be placed
+    within 3 tiles of a road.
   pop_cost: 0
   food_cost: 0
-  wood_cost: 3
-  ore_cost: 0
+  wood_cost: 1
+  ore_cost: 1
   money_cost: 0
 --- !u!1 &8089640178363728964
 GameObject:

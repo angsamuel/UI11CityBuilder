@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BldgPlace
   - TerrainCube
+  - Hand
   layers:
   - Default
   - TransparentFX

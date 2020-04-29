@@ -479,10 +479,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77d458a5e03dac40936c8639b5be4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_name: 
+  building_name: House
+  description: Provides (+1) population. Must be placed adjacent to a road.
   pop_cost: 0
   food_cost: 1
-  wood_cost: 2
+  wood_cost: 1
   ore_cost: 0
   money_cost: 0
 --- !u!1 &4287923433855384474

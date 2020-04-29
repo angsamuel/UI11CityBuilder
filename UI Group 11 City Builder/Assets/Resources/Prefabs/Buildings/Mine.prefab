@@ -295,10 +295,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894d3632a0ab9ae409afe870ba79ba92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_name: 
+  building_name: Mine
+  description: Provides (+1) ore for each adjacent ore deposit. Cannot be placed
+    within 2 tiles of another mine. Must be placed adjacent to a road.
   pop_cost: 0
   food_cost: 0
-  wood_cost: 3
+  wood_cost: 2
   ore_cost: 0
   money_cost: 0
 --- !u!1 &6952380063298385602

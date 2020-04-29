@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   building_name: Road
+  description: Must be placed next to another road, or the city center.
   pop_cost: 0
   food_cost: 0
   wood_cost: 1

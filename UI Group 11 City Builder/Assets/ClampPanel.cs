@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CityCenter : Building
+public class ClampPanel : MonoBehaviour
 {
+    public Image panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,14 +15,7 @@ public class CityCenter : Building
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 pos = Camera.main.WorldToScreenPoint(this.transform.position);
+        panel.transform.position = pos;
     }
-
-    public override void ActivateBuilding(){
-        game_manager.wood += 20;
-        game_manager.ore += 10;
-        game_manager.food += 0;
-    }
-
-
 }

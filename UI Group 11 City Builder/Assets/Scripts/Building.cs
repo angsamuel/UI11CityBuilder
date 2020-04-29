@@ -5,8 +5,10 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     public string building_name;
+    public string description;
     protected int x_coord = -1;
     protected int z_coord = -1;
+    
 
     [Header("Cost")]
     public int pop_cost;

@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        GenerateTerrain(9);
+        GenerateTerrain(13);
         PlaceCityCenter();
         PlaceNature();
         

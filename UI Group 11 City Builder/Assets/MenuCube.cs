@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CityCenter : Building
+public class MenuCube : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,12 +15,4 @@ public class CityCenter : Building
     {
         
     }
-
-    public override void ActivateBuilding(){
-        game_manager.wood += 20;
-        game_manager.ore += 10;
-        game_manager.food += 0;
-    }
-
-
 }
